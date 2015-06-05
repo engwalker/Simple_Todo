@@ -4,13 +4,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    //three variables for the ArrayList, an ArrayAdapter, and the ListView
+    private ArrayList<String> items;
+    private ArrayAdapter<String> itemsAdapter;
+    private ListView listViewItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //finds view by id, creates the new arraylist, creates the new ArrayAdapter(bridge between listview and data in list, then sets the adapter for listViewItems
+        listViewItems = (ListView) findViewById(R.id.listViewItems);
+        items = new ArrayList<>();
+        itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        listViewItems.setAdapter(itemsAdapter);
+
     }
 
     @Override
