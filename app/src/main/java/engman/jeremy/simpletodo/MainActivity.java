@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -48,5 +50,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //new method that is attached to the addItemButton
+    public void onClick(View v) {
+        //new edit text variable, with xml edittext box assigned by id
+        EditText editTextNewItem = (EditText) findViewById(R.id.editTextNewItem) ;
+        //new string variable with text in editTextNewItem textbox assigned and converted to string
+        String itemText = editTextNewItem.getText().toString();
+        //Array adapter adds new item to array
+        itemsAdapter.add(itemText);
+        //blanks the editTextNewItem text box since it's been added to the list
+        editTextNewItem.setText("");
     }
 }
