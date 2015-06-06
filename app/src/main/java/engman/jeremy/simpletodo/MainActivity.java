@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         items = new ArrayList<>();
         itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
         listViewItems.setAdapter(itemsAdapter);
+        //call item removal listener for long press
+        longPressListener();
 
     }
 
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     //new method that is attached to the addItemButton
     public void onClick(View v) {
         //new edit text variable, with xml edittext box assigned by id
-        EditText editTextNewItem = (EditText) findViewById(R.id.editTextNewItem) ;
+        EditText editTextNewItem = (EditText) findViewById(R.id.editTextNewItem);
         //new string variable with text in editTextNewItem textbox assigned and converted to string
         String itemText = editTextNewItem.getText().toString();
         //Array adapter adds new item to array
@@ -63,4 +66,21 @@ public class MainActivity extends AppCompatActivity {
         //blanks the editTextNewItem text box since it's been added to the list
         editTextNewItem.setText("");
     }
+
+    //creates an event handler that listens for long presses on items in the ListView
+    private void longPressListener() {
+        listViewItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //remove item in the items array at position that has been long pressed
+                items.remove(position);
+                //refresh the adapter
+               itemsAdapter.notifyDataSetChanged();
+                //return true to show that the even has been handled
+                return true;
+            }
+        });
+    }
+
+
 }
