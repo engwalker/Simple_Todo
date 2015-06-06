@@ -1,5 +1,8 @@
 package engman.jeremy.simpletodo;
 
+import android.content.ClipData;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         listViewItems.setAdapter(itemsAdapter);
         //call item removal listener for long press
         longPressListener();
-
     }
 
     @Override
@@ -63,6 +65,22 @@ public class MainActivity extends AppCompatActivity {
         String itemText = editTextNewItem.getText().toString();
         //Array adapter adds new item to array
         itemsAdapter.add(itemText);
+
+        /** sqlite database code
+        //instantiate the dbhelper class
+        ItemEntryDbHelper itemDbHelper = new ItemEntryDbHelper(this);
+        //gets data repository in write mode
+        SQLiteDatabase database = itemDbHelper.getWritableDatabase();
+        //create new map of values, column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(SQLDatabaseClass.ItemEntry.COLUMN_NAME_ITEM_ID, items.size()+1);
+        values.put(SQLDatabaseClass.ItemEntry.COLUMN_NAME_ITEM_TEXT, itemText);
+
+        //inserts the new row in the database, returning the primary key value of the new row
+        long newRowId;
+        newRowId = database.insert(SQLDatabaseClass.ItemEntry.TABLE_NAME, null, values);
+        */
+
         //blanks the editTextNewItem text box since it's been added to the list
         editTextNewItem.setText("");
     }
