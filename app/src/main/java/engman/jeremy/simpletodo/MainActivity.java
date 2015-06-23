@@ -41,14 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
         //create (if not exist) or open database and table
         db = openOrCreateDatabase("ItemDB", Context.MODE_PRIVATE, null);
-        //db.execSQL("CREATE TABLE IF NOT EXISTS item(itemnum INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, itemtext VARCHAR);");
         db.execSQL("CREATE TABLE IF NOT EXISTS item(itemid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, itemtext VARCHAR);");
 
         //runs an SQL query selecting all from table item
         c = db.rawQuery("SELECT * FROM item", null);
         //populate arrayList if there are items in the database
         dbLength = c.getCount();
-        //c.movetofirst not working?
+        //TODO: learn about c.movetofirst for use in this if statement
         if (dbLength != 0 )
         {
             while (c.moveToNext()) {
