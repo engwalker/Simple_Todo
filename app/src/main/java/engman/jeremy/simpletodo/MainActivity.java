@@ -76,7 +76,15 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        // TODO: 6/28/15 Create settings menu. Look into different themes 
         if (id == R.id.action_settings) {
+            Toast.makeText(MainActivity.this, "Settings not implemented yet", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        //about menu option
+        if (id == R.id.action_about) {
+            Toast.makeText(MainActivity.this, "Simple to do list\nCreated by: Jeremy Engman", Toast.LENGTH_LONG).show();
             return true;
         }
 
