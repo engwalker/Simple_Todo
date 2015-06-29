@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         //create (if not exist) or open database and table
         db = openOrCreateDatabase("ItemDB", Context.MODE_PRIVATE, null);
+
         db.execSQL("CREATE TABLE IF NOT EXISTS item(itemid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, itemtext VARCHAR);");
 
         //runs an SQL query selecting all from table item
